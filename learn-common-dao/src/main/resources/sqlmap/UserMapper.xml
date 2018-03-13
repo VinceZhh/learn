@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vince.java.learn.dao.UserDao">
+    <!-- User的resultMap,column是给数据库列起的别名,它对应property类的属性-->
+    <resultMap id="result_User_Map" type="com.vince.java.learn.entity.User">
+        <id column="id" property="id" />
+        <result column="address" property="address" />
+        <result column="psw" property="psw" />
+        <result column="name" property="name" />
+        <result column="telephone" property="telephone" />
+    </resultMap>
+
+    <!-- 数据库中表名为:user的列名,as前是数据库的列明,as后是列的别名用于映射成实体类中的属性,需要注意的是别名必须与resultMap中的column别名一致 -->
+    <sql id="user_Column">
+        user.id as id
+        ,user.address as address
+        ,user.psw as psw
+        ,user.name as name
+        ,user.telephone as telephone
+    </sql>
+
+
+    <!-- 获得类名为:User对应数据库中表的数据集合 -->
+    <select id="selectUser" resultMap="result_User_Map">
+        select 
+        <include refid="user_Column" /> 
+        from user
+    </select> 
+
+    <!-- 获得一个User对象,以参数User对象中不为空的属性作为条件进行查询-->
+    <select id="selectUserByObj" parameterType="com.vince.java.learn.entity.User" resultMap="result_User_Map">
+        select 
+            <include refid="user_Column" /> 
+        from user
+        <where>
+            <if test="telephone != null "> and user.telephone = #{telephone}</if>
+            <if test="name != null "> and user.name = #{name}</if>
+            <if test="psw != null "> and user.psw = #{psw}</if>
+            <if test="address != null "> and user.address = #{address}</if>
+            <if test="id != null "> and user.id = #{id}</if>
+        </where>
+    </select> 
+
+    <!-- 通过User的id获得对应数据库中表的数据对象-->
+    <select id="selectUserById" parameterType="java.lang.Long" resultMap="result_User_Map">
+        select 
+            <include refid="user_Column" /> 
+        from user
+        where user.id = #{id}
+    </select> 
+
+    <!-- 将User插入到对应数据库的表中,包括属性值为null的数据-->
+
+    <insert id="insertUser" parameterType="com.vince.java.learn.entity.User">
+        insert into user(id,address,psw,name,telephone) 
+        values(#{id},#{address},#{psw},#{name},#{telephone})
+    </insert>
+
+
+    <!-- 通过User的id将数据库表中对应的数据删除-->
+    <delete id="deleteUserById" parameterType="java.lang.Long">
+        delete from user
+        where id = #{id}
+    </delete>
+
+
+    <!-- 通过User的id将User中属性值不为null的数据更新到数据库对应的表中-->
+    <update id="updateUserById" parameterType="com.vince.java.learn.entity.User">
+        update user
+        <set>
+            <if test="address != null">
+                address=#{address},
+            </if>
+            <if test="psw != null">
+                psw=#{psw},
+            </if>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="telephone != null">
+                telephone=#{telephone},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>
