@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallback;
-import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
@@ -46,7 +45,7 @@ public class Transaction {
                 try {
                     user.setPsw("------");
                     userDao.insertUser(user);
-                    int i = 1 / 0;//引发异常
+//                    int i = 1 / 0;//引发异常
                     return null;
                 }catch (Exception e){
                     transactionStatus.setRollbackOnly();
@@ -55,15 +54,14 @@ public class Transaction {
             }
         });
 
-        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
-            @Override
-            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
-                user.setPsw("------");
-                userDao.insertUser(user);
-                int i = 1/0;//引发异常
-
-            }
-        });
+//        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+//            @Override
+//            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+//                user.setPsw("------");
+//                userDao.insertUser(user);
+//                int i = 1/0;//引发异常
+//            }
+//        });
     }
 
 }

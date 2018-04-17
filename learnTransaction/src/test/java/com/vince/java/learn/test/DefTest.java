@@ -25,7 +25,7 @@ public class DefTest {
     @Test
     public void test() {
         User user = new User();
-        String flag = "06";
+        String flag = "09";
         user.setName("TestName" + flag);
         user.setAddress("TestAddress" + flag);
         user.setTelephone("170102861"+flag);
@@ -47,4 +47,5 @@ public class DefTest {
             logger.info("u: {}",u);
         }
     }
+
 }
