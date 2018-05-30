@@ -6,7 +6,7 @@
   <artifactId>learn</artifactId>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>learnTransaction</module>
+    <module>learn-Transaction</module>
     <module>learn-common-dao</module>
     <module>learn-common-entity</module>
   </modules>
