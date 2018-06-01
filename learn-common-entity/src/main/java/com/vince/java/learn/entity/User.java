@@ -1,4 +1,8 @@
 package com.vince.java.learn.entity;
+
+/**
+ * @author vince_zh
+ */
 public class User {
     private Long id;
     private String address;
