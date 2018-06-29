@@ -1,7 +1,7 @@
-package com.vince.java.learn;
+package com.vince.java.learn.netty;
 
-import com.vince.java.learn.dao.UserDao;
-import com.vince.java.learn.entity.User;
+import com.vince.java.learn.netty.dao.UserDao;
+import com.vince.java.learn.netty.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;

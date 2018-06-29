@@ -1,6 +1,6 @@
-package com.vince.java.learn;
+package com.vince.java.learn.netty;
 
-import com.vince.java.learn.entity.User;
+import com.vince.java.learn.netty.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,10 +57,11 @@ public class JavaOptional {
 
     private String codingInJava8(int index) {
         User u = users.get(index);
+        Optional uo = Optional.ofNullable(u);
         return Optional.ofNullable(u)
                 .map(User::getTelephone)
                 .map(tel -> tel.substring(0,4) + "****" + tel.substring(8))
-                .orElse("user info unComplete");
+                .orElse("123");
     }
 
     public static void main(String[] args) {

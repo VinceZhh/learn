@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+       default-autowire="byName">
+    <context:annotation-config/>
+    <context:component-scan base-package="com.vince.java"/>
+
+    <context:property-placeholder ignore-unresolvable="true"
+                                  location="classpath:resources.properties"/>
+    <util:properties id="properties"
+                     location="classpath:resources.properties"/>
+
+
+    <!--<bean id="transaction" class="com.vince.java.learn.Transaction"/>-->
+    <import resource="classpath:spring/spring-config-dao.xml"/>
+
+    <!--开启aop织入-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- 开启事务控制的注解支持      声明式事务-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 配置transactionTemplate 编程式事务 -->
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="transactionManager"></property>
+        <!--定义事务隔离级别,-1表示使用数据库默认级别-->
+        <property name="readOnly" value="false"></property>
+        <property name="isolationLevelName" value="ISOLATION_SERIALIZABLE"></property>
+        <property name="propagationBehaviorName" value="PROPAGATION_REQUIRED"></property>
+    </bean>
+
+</beans>

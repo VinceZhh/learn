@@ -1,7 +1,7 @@
-package com.vince.java.learn.dao;
+package com.vince.java.learn.netty.dao;
 
 
-import com.vince.java.learn.entity.User;
+import com.vince.java.learn.netty.entity.User;
 
 import java.util.List;
 

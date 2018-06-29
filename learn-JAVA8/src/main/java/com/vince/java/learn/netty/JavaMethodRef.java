@@ -1,8 +1,12 @@
-package com.vince.java.learn;
+package com.vince.java.learn.netty;
 
-import com.vince.java.learn.entity.User;
+import com.alibaba.fastjson.JSONObject;
+import com.vince.java.learn.netty.entity.User;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 
 /**
@@ -31,11 +35,20 @@ public class JavaMethodRef {
     }
 
     private void codingInJava7() {
-        Collections.sort(users, (o1, o2) -> Long.compare(o1.getId(),o2.getId()));
+        users.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
     }
 
     private void codingInJava8() {
         users.sort(Comparator.comparingLong(User::getId));
+        List<String> list = Arrays.asList("A","c","b","f","e");
+        list.sort(String::indexOf);
+        System.out.println(JSONObject.toJSONString(list));
+
+    }
+    public static void main(String[] args){
+        JavaMethodRef javaMethodRef = new JavaMethodRef();
+        javaMethodRef.codingInJava8();
+
     }
 
 }

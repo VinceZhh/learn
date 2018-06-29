@@ -1,4 +1,4 @@
-package com.vince.java.learn.entity;
+package com.vince.java.learn.netty.entity;
 
 /**
  * @author vince_zh

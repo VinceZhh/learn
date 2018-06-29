@@ -1,12 +1,9 @@
-package com.vince.java.learn;
+package com.vince.java.learn.netty;
 
 import com.alibaba.fastjson.JSONObject;
-import com.vince.java.learn.entity.User;
+import com.vince.java.learn.netty.entity.User;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -61,15 +58,27 @@ public class JavaStreams {
 
     private void codingInJava8() {
 
-        List<Long> userJamesId =
-                users.stream()
+        List<User> userJamesId =
+                users.parallelStream()
+                        .filter(this::bj)
                         .filter(user -> user.getName().contains("james"))
                         .sorted(Comparator.comparingLong(User::getId))
-                        .map(User::getId)
                         .collect(Collectors.toList());
         System.out.println(JSONObject.toJSONString(userJamesId));
+
+
+        Map<Long, User> map = users.stream().collect(Collectors.toMap(User::getId, u -> u));
+
+
+        for (User user : users) {
+            map.put(user.getId(), user);
+        }
+        System.out.println("map: " + JSONObject.toJSONString(map));
     }
 
+    private boolean bj(User u) {
+        return u == null;
+    }
     public static void main(String[] args){
         JavaStreams javaStreams = new JavaStreams();
         javaStreams.codingInJava7();

@@ -1,4 +1,4 @@
-package com.vince.java.learn.test;
+package com.vince.java.learn.netty.test;
 
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;

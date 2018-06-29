@@ -1,7 +1,7 @@
-package com.vince.java.learn.test;
+package com.vince.java.learn.netty.test;
 
-import com.vince.java.learn.entity.User;
-import com.vince.java.learn.Transaction;
+import com.vince.java.learn.netty.entity.User;
+import com.vince.java.learn.netty.Transaction;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
