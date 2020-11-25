@@ -5,6 +5,7 @@ package com.vince.java.learn.netty;
  */
 public class JavaCompletableFuture {
     private void codingInJava7() {
+        //aaaa
     }
 
     private void codingInJava8() {
